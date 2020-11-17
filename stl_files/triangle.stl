@@ -1,0 +1,8 @@
+solid name
+facet normal 0 0 -1
+    outer loop
+        vertex  2.124 3.5445 1.5644
+        vertex  5.45456 9.27 1.454545
+        vertex  3.124545 8.25454 1.488948
+    endloop
+endfacet
