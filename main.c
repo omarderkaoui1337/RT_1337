@@ -5,9 +5,9 @@ void print_the_data(t_triangles *tst)
 	while (tst)
 		{
 			printf("normal = [%f] [%f] [%f]\n",tst->normal.x,tst->normal.y,tst->normal.z);
-			printf("-------->vertix[0] = [%f] [%f] [%f]\n",tst->vertix[0].x,tst->vertix[0].y,tst->vertix[0].z);
-			printf("-------->vertix[1] = [%f] [%f] [%f]\n",tst->vertix[1].x,tst->vertix[1].y,tst->vertix[2].z);
-			printf("-------->vertix[2] = [%f] [%f] [%f]\n",tst->vertix[2].x,tst->vertix[2].y,tst->vertix[2].z);
+			printf("-------->ver[0] = [%f] [%f] [%f]\n",tst->ver[0].x,tst->ver[0].y,tst->ver[0].z);
+			printf("-------->ver[1] = [%f] [%f] [%f]\n",tst->ver[1].x,tst->ver[1].y,tst->ver[2].z);
+			printf("-------->ver[2] = [%f] [%f] [%f]\n",tst->ver[2].x,tst->ver[2].y,tst->ver[2].z);
 			tst = tst->next;
 		}
 }
@@ -22,14 +22,35 @@ void print_the_box(t_box box)
 	printf("box.z_min %f \n ",box.z_min);
 }
 
+void print_the_cube(t_cube cube)
+{
+	printf("cube a %f %f %f\n", cube.a.x, cube.a.y, cube.a.z);
+	printf("cube b %f %f %f\n", cube.b.x, cube.b.y, cube.b.z);
+	printf("cube c %f %f %f\n", cube.c.x, cube.c.y, cube.c.z);
+	printf("cube d %f %f %f\n", cube.d.x, cube.d.y, cube.d.z);
+	printf("cube e %f %f %f\n", cube.e.x, cube.e.y, cube.e.z);
+	printf("cube f %f %f %f\n", cube.f.x, cube.f.y, cube.f.z);
+	printf("cube g %f %f %f\n", cube.g.x, cube.g.y, cube.g.z);
+	printf("cube h %f %f %f\n", cube.h.x, cube.h.y, cube.h.z);
+}
+
+void print_the_camera(t_camera camera)
+{
+	printf("eye %f %f %f\n", camera.eye.x, camera.eye.y, camera.eye.z);
+	printf("look_at %f %f %f\n", camera.look_at.x, camera.look_at.y, camera.look_at.z);
+	printf("up %f %f %f\n", camera.up.x, camera.up.y, camera.up.z);
+	printf("u %f %f %f\n", camera.u.x, camera.u.y, camera.u.z);
+	printf("v %f %f %f\n",camera.v.x, camera.v.y, camera.v.z);
+	printf("view_dir %f %f %f\n",camera.view_dir.x, camera.view_dir.y, camera.view_dir.z);
+	printf("h_width %f \n", camera.h_width);
+	printf("h_height %f \n", camera.h_height);
+}
 t_triangles* removeLastNode(t_triangles *head) 
 { 
     if (head == NULL) 
         return NULL; 
-    if (head->next == NULL) { 
-        free(head); 
-        return NULL; 
-    } 
+    if (head->next == NULL)
+        return (head);
     t_triangles *second_last = head; 
     while (second_last->next->next != NULL) 
         second_last = second_last->next; 
@@ -44,19 +65,26 @@ int main(int ac, char **arv)
 	int fd;
     if (ac == 2)
 	{
+		ft_mlx_setup(&mlx);
 		t_triangles *tst;
 		t_box	box;
 		t_camera cam;
+		t_cube cube;
 
 		fd = open(arv[1], O_RDONLY);
 		tst = stock_triangles(fd);
 		tst = removeLastNode(tst);
-		print_the_data(tst);
-		/*box = find_box(tst);
-		print_the_box(box);*/
-		/*cam = creat_camera(box);
+		//print_the_data(tst);
+
+		box = find_box(tst);
+		//print_the_box(box);
+
+		cube = creat_cube(box);
+		//print_the_cube(cube);
+
+		cam = creat_camera(box);
+		//print_the_camera(cam);
 		draw(&mlx, cam, tst);
-		ft_mlx_setup(&mlx);*/
 	}
 	else
 	{

@@ -13,12 +13,6 @@ int cheak_the_patren(char *line)
 
 int *find_indxs(char *str)
 {
-    if (!cheak_the_patren(str))
-    {
-        printf("hello i am her in find_indxs\n");
-        return (NULL);
-    }
-
     int *tab = (int *)malloc(sizeof(int) * 3);
     int i = -1;
     int j = -1;
@@ -32,12 +26,6 @@ t_point line_to_points(char *line)
 {
     t_point vertx;
     int *tab = find_indxs(line);
-    if (tab == NULL)
-    {
-        printf("line = %s\n", line);
-        printf("hey i am here in line to_ point\n");
-        exit(0);
-    };
     vertx.x = atof(&line[tab[0]]);
     vertx.y = atof(&line[tab[1]]);
     vertx.z = atof(&line[tab[2]]);
@@ -84,7 +72,7 @@ t_triangles *stock_triangles(int fd)
     int l = 0;
     int k = 0;
 
-    head->vertix = (t_point *)malloc(sizeof(t_point) * 3);
+    head->ver = (t_point *)malloc(sizeof(t_point) * 3);
     while (get_next_line(fd, &line))
     {
         l++;
@@ -93,12 +81,12 @@ t_triangles *stock_triangles(int fd)
         if ((l - 2) % 7 == 0 && ft_strstr(line, "facet normal") != NULL)
             head->normal = line_to_points(line);
         if ((l - 4) % 7 == 0 || (l - 5) % 7 == 0 || (l - 6) % 7 == 0)
-            head->vertix[k++] = line_to_points(line);
+            head->ver[k++] = line_to_points(line);
         if (l % 7 == 0 && ft_strstr(line, "endloop") != NULL)
         {
             k = 0;
             head->next = (t_triangles *)malloc(sizeof(t_triangles));
-            head->next->vertix = (t_point *)malloc(sizeof(t_point) * 3);
+            head->next->ver = (t_point *)malloc(sizeof(t_point) * 3);
             head = head->next;
         }
         free(line);

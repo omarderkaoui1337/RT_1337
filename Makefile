@@ -31,7 +31,7 @@ $(NAME): $(OBJS)
 
 $(OBJS): %.o : %.c
 	#@gcc $(CFLAGS) -c -o $@ $<
-	gcc  -c -o $@ $<
+	@gcc -c -o $@ $<
 clean:
 	@rm -f $(OBJS)
 

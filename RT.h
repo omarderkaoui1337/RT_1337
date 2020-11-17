@@ -14,6 +14,13 @@
 # define HEIGHT			1000
 # define WIDTH			1000
 
+# define MAX 1000000.000
+
+# define BLACK			0x212121
+
+#define HER printf("i am her\n");
+#define HELLO printf("hello\n");
+
 # define DEG_TO_RAD(X) (X * (M_PI / 180.0));
 
 typedef struct		s_mlx
@@ -41,7 +48,7 @@ typedef struct s_point t_vector	;
 typedef struct s_triangles
 {
 	double	t;
-	t_point *vertix;
+	t_point *ver;
 	t_point normal;
 	struct s_triangles* next;
 }               t_triangles;
@@ -120,5 +127,6 @@ t_ray			generate_ray(t_camera *camera, int i, int j);
 void		draw(t_mlx *mlx, t_camera c, t_triangles *triangles);
 t_camera creat_camera(t_box box);
 t_box find_box(t_triangles *list);
+t_cube creat_cube(t_box box);
 
 #endif

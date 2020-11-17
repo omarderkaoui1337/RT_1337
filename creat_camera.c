@@ -8,7 +8,7 @@ t_cube creat_cube(t_box box)
     cube.c = (t_point) {box.x_max, box.y_max, box.z_min};
     cube.d = (t_point) {box.x_max, box.y_min, box.z_min};
     cube.e = (t_point) {box.x_min, box.y_min, box.z_max};
-    cube.f = (t_point) {box.x_min, box.y_max, box.x_max};
+    cube.f = (t_point) {box.x_min, box.y_max, box.z_max};
     cube.g = (t_point) {box.x_max, box.y_max, box.z_max};
     cube.h = (t_point) {box.x_max, box.y_min, box.z_max};
     return (cube);
@@ -51,8 +51,6 @@ t_camera creat_camera(t_box box)
 	camera.aspect_ratio = (float)WIDTH / (float)HEIGHT;
 	camera.h_width = camera.aspect_ratio * camera.h_height;*/
     camera.h_height = get_dist(cube.d,cube.a);
-    printf("cube.d %f %f %f\n",cube.a.x, cube.a.y, cube.a.z);
-    printf("camera.height %f\n",camera.h_height);
     camera.h_width = get_dist(cube.b,cube.a);
     camera.fov = DEG_TO_RAD(60);
     return (camera);
