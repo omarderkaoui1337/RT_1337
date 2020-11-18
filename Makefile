@@ -1,3 +1,7 @@
+#@gcc $(OBJS) -o $(NAME) $(LFLAGS) $(LIBFT) 
+#@gcc $(CFLAGS) -c -o $@ $<
+
+PFLAGS= -L/usr/X11/lib /usr/X11/lib/libmlx.a -lXext -lX11 -lm
 NAME  = RT
 CFLAGS = -Wall -Werror -Wextra
 CC = gcc
@@ -14,23 +18,20 @@ SRCS  = main.c\
 		vectors_ops.c\
 		traingle_intersection.c\
 
-
 LIBFT = libft/libft.a
-
 
 OBJS = $(SRCS:.c=.o)
 
 all: lib $(NAME)
 
 lib:
-	@make -C libft > /dev/null
+	@make -C libft
 
 $(NAME): $(OBJS)
-	@gcc $(OBJS) -o $(NAME) $(LFLAGS) $(LIBFT)
+	@gcc $(OBJS) -o $(NAME) $(PFLAGS) $(LIBFT)
 	@echo "\033[92mDone\033[0m"
 
 $(OBJS): %.o : %.c
-	#@gcc $(CFLAGS) -c -o $@ $<
 	@gcc -c -o $@ $<
 clean:
 	@rm -f $(OBJS)

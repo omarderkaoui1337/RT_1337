@@ -2,8 +2,6 @@
 
 double         rt_intersction(t_triangles *triangle, t_ray ray)
 {
-    if (triangle ==NULL)
-        exit(0);
     t_vector e1 = vec_sub(triangle->ver[1],triangle->ver[0]);
     t_vector e2 = vec_sub(triangle->ver[2],triangle->ver[0]);
     t_vector p = vec_cross(ray.dir,e2);
@@ -26,27 +24,25 @@ double         rt_intersction(t_triangles *triangle, t_ray ray)
 
 t_triangles     *find_closest(t_triangles *h_triangle, t_ray ray)
 {
-    t_triangles* triangle;
-    double t = MAX;
-    h_triangle->t = MAX;
+    t_triangles*    triangle;
+    double          t = MAX;
+    double          tmp;
+
     while (h_triangle)
     {
-        h_triangle->t = rt_intersction(h_triangle, ray);
-        //printf("h_triangle->t %f\n",h_triangle->t);
+        tmp = rt_intersction(h_triangle, ray);
+        printf("%f \n",);
+        h_triangle->t = tmp;
         if (h_triangle->t < t)
         {
             triangle = h_triangle;
             t = h_triangle->t;
-        } 
+        }
         h_triangle = h_triangle->next;
     }
-    //printf("triangle -> t %f\n",triangle->t);
     if (triangle->t == MAX)
-    {
-        exit(0);
-        return (NULL);
-    }
-    return (triangle);
+        return NULL;
+    return triangle;
 }
 
 
@@ -66,17 +62,15 @@ void		draw(t_mlx *mlx, t_camera c, t_triangles *triangles)
 		{
             ray = generate_ray(&c,i,j);
             //printf("ray origine %f %f %f\n",ray.origin.x, ray.origin.y, ray.origin.z);
-           // printf("ray dir %f %f %f\n",ray.dir.x, ray.dir.y, ray.dir.z);
+            //printf("ray dir %f %f %f\n",ray.dir.x, ray.dir.y, ray.dir.z);
             one = find_closest(triangles,ray);
-            //printf("one->t = %f\n",one->t);
-           /// if (one->t == MAX)
-            //{
-            //    HER
-                //ft_mlx_pixel_put(mlx, i, j, 0x000000);
-                //continue;
-            //}
-			//ft_mlx_pixel_put(mlx, i, j, 0xff);
+            if (one->t == MAX)
+            {
+                ft_mlx_pixel_put(mlx, i, j, 0x000000);
+                continue;
+            }
+			ft_mlx_pixel_put(mlx, i, j, 0xff);
 		}
 	}
-	//mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_ptr, 0, 0);
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_ptr, 0, 0);
 }

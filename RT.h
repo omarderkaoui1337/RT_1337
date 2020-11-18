@@ -1,6 +1,7 @@
 #ifndef RT_H
 # define RT_H
 
+#include <ctype.h>// for isadigit
 # include "mlx.h"
 # include <math.h>
 # include <fcntl.h>
@@ -11,8 +12,11 @@
 # include <stdbool.h>
 # include <float.h>
 
-# define HEIGHT			1000
-# define WIDTH			1000
+/*# define HEIGHT			1000
+# define WIDTH			1000*/
+
+# define HEIGHT			100
+# define WIDTH			100
 
 # define MAX 1000000.000
 
@@ -128,5 +132,8 @@ void		draw(t_mlx *mlx, t_camera c, t_triangles *triangles);
 t_camera creat_camera(t_box box);
 t_box find_box(t_triangles *list);
 t_cube creat_cube(t_box box);
+
+double         rt_intersction(t_triangles *triangle, t_ray ray);
+t_ray			generate_ray(t_camera *camera, int i, int j);
 
 #endif

@@ -68,8 +68,10 @@ int main(int ac, char **arv)
 		ft_mlx_setup(&mlx);
 		t_triangles *tst;
 		t_box	box;
-		t_camera cam;
 		t_cube cube;
+		t_camera cam;
+		t_ray ray;
+		double t;
 
 		fd = open(arv[1], O_RDONLY);
 		tst = stock_triangles(fd);
@@ -85,6 +87,11 @@ int main(int ac, char **arv)
 		cam = creat_camera(box);
 		//print_the_camera(cam);
 		draw(&mlx, cam, tst);
+
+		//ray = generate_ray(&cam, 9,10);
+		//t = rt_intersction(tst, ray);
+		//printf("t = %f\n",t);
+
 	}
 	else
 	{
