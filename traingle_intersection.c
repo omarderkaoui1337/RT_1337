@@ -22,30 +22,34 @@ double         rt_intersction(t_triangles *triangle, t_ray ray)
     return (t);
 }
 
-t_triangles     *find_closest(t_triangles *h_triangle, t_ray ray)
+int fequal(float a, float b)
 {
-    t_triangles*    triangle;
-    double          t = MAX;
-    double          tmp;
-
-    while (h_triangle)
-    {
-        tmp = rt_intersction(h_triangle, ray);
-        printf("%f \n",);
-        h_triangle->t = tmp;
-        if (h_triangle->t < t)
-        {
-            triangle = h_triangle;
-            t = h_triangle->t;
-        }
-        h_triangle = h_triangle->next;
-    }
-    if (triangle->t == MAX)
-        return NULL;
-    return triangle;
+ return fabs(a-b) < 0.0001;
 }
 
+t_triangles     *find_closest(t_triangles *head, t_ray ray)
+{
+    t_triangles*    triangle = (t_triangles*)malloc(sizeof(t_triangles));
+    triangle->t = MAX;
+    double          t = MAX;
+    double          tmp;
+    int i = 0;
 
+    while (head != NULL)
+    {
+        tmp = rt_intersction(head, ray);
+        head->t = tmp;
+        if (head->t < t)
+        {
+            triangle = head;
+            t = head->t;
+        }
+        head = head->next;
+    }
+    if (triangle->t == MAX)
+        return (NULL);
+    return (triangle);
+}
 
 void		draw(t_mlx *mlx, t_camera c, t_triangles *triangles)
 {
@@ -53,18 +57,15 @@ void		draw(t_mlx *mlx, t_camera c, t_triangles *triangles)
 	t_ray		ray;
     t_triangles *one;
 
-	i = -1;
-    
+	i = -1;   
 	while (++i < WIDTH)
 	{
 		j = -1;
 		while (++j < HEIGHT)
 		{
             ray = generate_ray(&c,i,j);
-            //printf("ray origine %f %f %f\n",ray.origin.x, ray.origin.y, ray.origin.z);
-            //printf("ray dir %f %f %f\n",ray.dir.x, ray.dir.y, ray.dir.z);
             one = find_closest(triangles,ray);
-            if (one->t == MAX)
+            if (one == NULL)
             {
                 ft_mlx_pixel_put(mlx, i, j, 0x000000);
                 continue;

@@ -12,13 +12,10 @@
 # include <stdbool.h>
 # include <float.h>
 
-/*# define HEIGHT			1000
-# define WIDTH			1000*/
+# define HEIGHT			1000
+# define WIDTH			1000
 
-# define HEIGHT			100
-# define WIDTH			100
-
-# define MAX 1000000.000
+extern double MAX;
 
 # define BLACK			0x212121
 
@@ -135,5 +132,6 @@ t_cube creat_cube(t_box box);
 
 double         rt_intersction(t_triangles *triangle, t_ray ray);
 t_ray			generate_ray(t_camera *camera, int i, int j);
+t_triangles     *find_closest(t_triangles *h_triangle, t_ray ray);
 
 #endif

@@ -1,5 +1,7 @@
 #include "RT.h"
 
+double MAX = 1000000.0;
+
 void print_the_data(t_triangles *tst)
 {
 	while (tst)
@@ -72,25 +74,14 @@ int main(int ac, char **arv)
 		t_camera cam;
 		t_ray ray;
 		double t;
+		t_triangles *traingle;
 
 		fd = open(arv[1], O_RDONLY);
 		tst = stock_triangles(fd);
 		tst = removeLastNode(tst);
-		//print_the_data(tst);
-
 		box = find_box(tst);
-		//print_the_box(box);
-
-		cube = creat_cube(box);
-		//print_the_cube(cube);
-
 		cam = creat_camera(box);
-		//print_the_camera(cam);
 		draw(&mlx, cam, tst);
-
-		//ray = generate_ray(&cam, 9,10);
-		//t = rt_intersction(tst, ray);
-		//printf("t = %f\n",t);
 
 	}
 	else

@@ -1,6 +1,9 @@
 #@gcc $(OBJS) -o $(NAME) $(LFLAGS) $(LIBFT) 
 #@gcc $(CFLAGS) -c -o $@ $<
 
+#@gcc $(OBJS) -o $(NAME) $(PFLAGS) $(LIBFT)
+
+
 PFLAGS= -L/usr/X11/lib /usr/X11/lib/libmlx.a -lXext -lX11 -lm
 NAME  = RT
 CFLAGS = -Wall -Werror -Wextra
@@ -28,7 +31,7 @@ lib:
 	@make -C libft
 
 $(NAME): $(OBJS)
-	@gcc $(OBJS) -o $(NAME) $(PFLAGS) $(LIBFT)
+	@gcc $(OBJS) -o $(NAME) $(LFLAGS) $(LIBFT)
 	@echo "\033[92mDone\033[0m"
 
 $(OBJS): %.o : %.c
