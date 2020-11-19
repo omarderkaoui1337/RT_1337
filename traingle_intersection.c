@@ -15,7 +15,7 @@ double         rt_intersction(t_triangles *triangle, t_ray ray)
     if (u < 0.0 || u > 1.0)
         return (MAX);
     t_vector q = vec_cross(s,e1);
-    float    v = f * vec_dot(ray.dir,p);
+    float    v = f * vec_dot(ray.dir,q);
     if (v < 0.0 || u + v > 1.0)
         return (MAX);
     double t = f * vec_dot(e2,q); 

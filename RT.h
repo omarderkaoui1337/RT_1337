@@ -15,6 +15,9 @@
 # define HEIGHT			1000
 # define WIDTH			1000
 
+/*# define HEIGHT			400
+# define WIDTH			400*/
+
 extern double MAX;
 
 # define BLACK			0x212121
@@ -128,7 +131,7 @@ t_ray			generate_ray(t_camera *camera, int i, int j);
 void		draw(t_mlx *mlx, t_camera c, t_triangles *triangles);
 t_camera creat_camera(t_box box);
 t_box find_box(t_triangles *list);
-t_cube creat_cube(t_box box);
+t_cube creat_cube(t_box box,double k);
 
 double         rt_intersction(t_triangles *triangle, t_ray ray);
 t_ray			generate_ray(t_camera *camera, int i, int j);
