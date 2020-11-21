@@ -47,12 +47,16 @@ void print_the_camera(t_camera camera)
 	printf("h_width %f \n", camera.h_width);
 	printf("h_height %f \n", camera.h_height);
 }
+
 t_triangles* removeLastNode(t_triangles *head) 
 { 
     if (head == NULL) 
         return NULL; 
-    if (head->next == NULL)
-        return (head);
+     if (head->next == NULL)
+	 { 
+        free(head); 
+        return NULL; 
+    } 
     t_triangles *second_last = head; 
     while (second_last->next->next != NULL) 
         second_last = second_last->next; 
@@ -63,34 +67,53 @@ t_triangles* removeLastNode(t_triangles *head)
 
 int main(int ac, char **arv)
 {
-    t_mlx mlx;
+	t_everything ever;
+	ever.mlx = (t_mlx*)malloc(sizeof(t_mlx));
 	int fd;
     if (ac == 2)
 	{
-		ft_mlx_setup(&mlx);
-		t_triangles *tst;
+		ft_mlx_setup(ever.mlx);
 		t_box	box;
-		t_cube cube;
-		t_camera cam;
-		t_ray ray;
-		double t;
-		t_triangles *traingle;
+
+		pthread_t	thread_ID[5];
+		void *exit_value0;
+		void *exit_value1;
+		void *exit_value2;
+		void *exit_value3;
+		void *exit_value4;
+	
 
 		fd = open(arv[1], O_RDONLY);
-		tst = stock_triangles(fd);
-		tst = removeLastNode(tst);
-		box = find_box(tst);
-		cam = creat_camera(box);
-		draw(&mlx, cam, tst);
+		ever.triangles = stock_triangles(fd);
+		ever.triangles = removeLastNode(ever.triangles);
+		box = find_box(ever.triangles);
+		ever.cam = creat_camera(box);
 
+		rt1(&ever);
+		rt2(&ever);
+		rt3(&ever);
+		rt4(&ever);
+		rt5(&ever);
+
+		/*pthread_create(&thread_ID[0], NULL, rt1, &ever);
+		pthread_create(&thread_ID[1], NULL, rt2, &ever);
+		pthread_create(&thread_ID[2], NULL, rt3, &ever);
+		pthread_create(&thread_ID[3], NULL, rt4, &ever);
+		pthread_create(&thread_ID[4], NULL, rt5, &ever);
+		
+		pthread_join(thread_ID[0], &exit_value0);
+		pthread_join(thread_ID[1], &exit_value1);
+		pthread_join(thread_ID[2], &exit_value2);
+		pthread_join(thread_ID[3], &exit_value3);
+		pthread_join(thread_ID[4], &exit_value4);*/
 	}
 	else
 	{
 		write(1, "\033[0;31mEnter a valid filename\n", 30);
 		return (1);
 	}
-    mlx_hook(mlx.win_ptr, 2, 0, key_press, &mlx);
-	mlx_hook(mlx.win_ptr, 17, 0, close_win, &mlx);
-    mlx_loop(mlx.mlx_ptr);
+    mlx_hook(ever.mlx->win_ptr, 2, 0, key_press, ever.mlx);
+	mlx_hook(ever.mlx->win_ptr, 17, 0, close_win, ever.mlx);
+    mlx_loop(ever.mlx->mlx_ptr);
     return(0);
 }

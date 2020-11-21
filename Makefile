@@ -3,7 +3,7 @@
 
 #@gcc $(OBJS) -o $(NAME) $(PFLAGS) $(LIBFT)
 
-
+PTHFLAG = -pthread
 PFLAGS= -L/usr/X11/lib /usr/X11/lib/libmlx.a -lXext -lX11 -lm
 NAME  = RT
 CFLAGS = -Wall -Werror -Wextra
@@ -31,7 +31,7 @@ lib:
 	@make -C libft
 
 $(NAME): $(OBJS)
-	@gcc $(OBJS) -o $(NAME) $(LFLAGS) $(LIBFT)
+	@gcc $(OBJS) -o $(NAME) $(LFLAGS) $(LIBFT) $(PTHFLAG)
 	@echo "\033[92mDone\033[0m"
 
 $(OBJS): %.o : %.c

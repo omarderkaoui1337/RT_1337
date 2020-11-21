@@ -51,8 +51,10 @@ t_triangles     *find_closest(t_triangles *head, t_ray ray)
     return (triangle);
 }
 
-void		draw(t_mlx *mlx, t_camera c, t_triangles *triangles)
+
+void *rt1(void *arg)
 {
+    t_everything *ever = (t_everything *)arg;
 	int i,j;
 	t_ray		ray;
     t_triangles *one;
@@ -61,17 +63,126 @@ void		draw(t_mlx *mlx, t_camera c, t_triangles *triangles)
 	while (++i < WIDTH)
 	{
 		j = -1;
-		while (++j < HEIGHT)
+		while (++j < (HEIGHT)/5)
 		{
-            ray = generate_ray(&c,i,j);
-            one = find_closest(triangles,ray);
+            ray = generate_ray(&ever->cam,i,j);
+            one = find_closest(ever->triangles,ray);
             if (one == NULL)
             {
-                ft_mlx_pixel_put(mlx, i, j, 0x000000);
+                ft_mlx_pixel_put(ever->mlx, i, j, 0x000000);
                 continue;
             }
-			ft_mlx_pixel_put(mlx, i, j, 0xff);
+			ft_mlx_pixel_put(ever->mlx, i, j, 0xff);
 		}
 	}
-	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_ptr, 0, 0);
+	mlx_put_image_to_window(ever->mlx->mlx_ptr,ever->mlx->win_ptr, ever->mlx->img_ptr, 0, 0);
+    return (NULL);
+}
+
+void *rt2(void *arg)
+{
+    t_everything *ever = (t_everything *)arg;
+	int i,j;
+	t_ray		ray;
+    t_triangles *one;
+
+	i = -1;   
+	while (++i < WIDTH)
+	{
+		j = (HEIGHT/5)-1;
+		while (++j < 2*(HEIGHT/5))
+		{
+            ray = generate_ray(&ever->cam,i,j);
+            one = find_closest(ever->triangles,ray);
+            if (one == NULL)
+            {
+                ft_mlx_pixel_put(ever->mlx, i, j, 0x000000);
+                continue;
+            }
+			ft_mlx_pixel_put(ever->mlx, i, j, 0xff);
+		}
+	}
+	mlx_put_image_to_window(ever->mlx->mlx_ptr,ever->mlx->win_ptr, ever->mlx->img_ptr, 0, 0);
+    return (NULL);
+}
+
+void *rt3(void *arg)
+{
+    t_everything *ever = (t_everything *)arg;
+	int i,j;
+	t_ray		ray;
+    t_triangles *one;
+
+	i = -1;   
+	while (++i < WIDTH)
+	{
+		j = 2*(HEIGHT/5)-1;
+		while (++j < 3*(HEIGHT/5))
+		{
+            ray = generate_ray(&ever->cam,i,j);
+            one = find_closest(ever->triangles,ray);
+            if (one == NULL)
+            {
+                ft_mlx_pixel_put(ever->mlx, i, j, 0x000000);
+                continue;
+            }
+			ft_mlx_pixel_put(ever->mlx, i, j, 0xff);
+		}
+	}
+	mlx_put_image_to_window(ever->mlx->mlx_ptr,ever->mlx->win_ptr, ever->mlx->img_ptr, 0, 0);
+    return (NULL);
+}
+
+void *rt4(void *arg)
+{
+    t_everything *ever = (t_everything *)arg;
+	int i,j;
+	t_ray		ray;
+    t_triangles *one;
+
+	i = -1;   
+	while (++i < WIDTH)
+	{
+		j = 3*(HEIGHT/5)-1;
+		while (++j < 4*(HEIGHT/5))
+		{
+            ray = generate_ray(&ever->cam,i,j);
+            one = find_closest(ever->triangles,ray);
+            if (one == NULL)
+            {
+                ft_mlx_pixel_put(ever->mlx, i, j, 0x000000);
+                continue;
+            }
+			ft_mlx_pixel_put(ever->mlx, i, j, 0xff);
+		}
+	}
+	mlx_put_image_to_window(ever->mlx->mlx_ptr,ever->mlx->win_ptr, ever->mlx->img_ptr, 0, 0);
+    return (NULL);
+}
+
+void *rt5(void *arg)
+{
+    t_everything *ever = (t_everything *)arg;
+	int i,j;
+	t_ray		ray;
+    t_triangles *one;
+
+	i = -1;   
+	while (++i < WIDTH)
+	{
+		j = 4*(HEIGHT/5)-1;
+		while (++j < 5*(HEIGHT/5))
+		{
+            ray = generate_ray(&ever->cam,i,j);
+            one = find_closest(ever->triangles,ray);
+            if (one == NULL)
+            {
+                ft_mlx_pixel_put(ever->mlx, i, j, 0x000000);
+                continue;
+            }
+			ft_mlx_pixel_put(ever->mlx, i, j, 0xff);
+		}
+	}
+	mlx_put_image_to_window(ever->mlx->mlx_ptr,ever->mlx->win_ptr, ever->mlx->img_ptr, 0, 0);
+    return (NULL);
 }

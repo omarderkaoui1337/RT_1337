@@ -12,11 +12,10 @@
 # include <stdbool.h>
 # include <float.h>
 
+#include <pthread.h>
+
 # define HEIGHT			1000
 # define WIDTH			1000
-
-/*# define HEIGHT			400
-# define WIDTH			400*/
 
 extern double MAX;
 
@@ -26,6 +25,7 @@ extern double MAX;
 #define HELLO printf("hello\n");
 
 # define DEG_TO_RAD(X) (X * (M_PI / 180.0));
+
 
 typedef struct		s_mlx
 {
@@ -107,6 +107,13 @@ typedef struct		s_cube
 	t_point	face_centre4; 
 }					t_cube;
 
+typedef struct 		s_everything
+{
+	t_mlx *mlx;
+	t_camera cam;
+	t_triangles *triangles;
+}					t_everything;
+
 int					key_press(int keycode, void *param);
 int					close_win(void *param);
 void	            ft_mlx_setup(t_mlx *mlx);
@@ -128,10 +135,14 @@ void	set_mlx_hooks(t_mlx *mlx);
 void	ft_mlx_setup(t_mlx *mlx);
 
 t_ray			generate_ray(t_camera *camera, int i, int j);
-void		draw(t_mlx *mlx, t_camera c, t_triangles *triangles);
 t_camera creat_camera(t_box box);
 t_box find_box(t_triangles *list);
 t_cube creat_cube(t_box box,double k);
+void *rt1(void *arg);
+void *rt2(void *arg);
+void *rt3(void *arg);
+void *rt4(void *arg);
+void *rt5(void *arg);
 
 double         rt_intersction(t_triangles *triangle, t_ray ray);
 t_ray			generate_ray(t_camera *camera, int i, int j);

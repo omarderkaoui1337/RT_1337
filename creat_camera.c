@@ -49,7 +49,7 @@ t_camera creat_camera(t_box box)
     t_cube cube;
     //float dist = 1;
     
-    cube = creat_cube(box,30);
+    cube = creat_cube(box,10);
     camera.up = (t_vector){0.0, 1.0, 0.0};
     camera.look_at = creat_look_at(cube);
     camera.eye = creat_look_from(cube, camera.look_at);
@@ -59,10 +59,10 @@ t_camera creat_camera(t_box box)
 	camera.v = vec_norm(vec_cross(camera.u, camera.view_dir));
 	camera.v = vec_kscale(-1, camera.v);
 	/*camera.h_height = tan(camera.fov / 2.0) * 2.0 * dist;
-	camera.aspect_ratio = (float)WIDTH / (float)HEIGHT;
 	camera.h_width = camera.aspect_ratio * camera.h_height;*/
+    camera.aspect_ratio = (float)WIDTH / (float)HEIGHT;
     camera.h_height = get_dist(cube.d,cube.a);
-    camera.h_width = get_dist(cube.b,cube.a);
+    camera.h_width = camera.aspect_ratio * camera.h_height;
     camera.fov = DEG_TO_RAD(60);
     return (camera);
 }
