@@ -93,19 +93,16 @@ int main(int ac, char **arv)
 		rt2(&ever);
 		rt3(&ever);
 		rt4(&ever);
-		rt5(&ever);
 
 		/*pthread_create(&thread_ID[0], NULL, rt1, &ever);
 		pthread_create(&thread_ID[1], NULL, rt2, &ever);
 		pthread_create(&thread_ID[2], NULL, rt3, &ever);
 		pthread_create(&thread_ID[3], NULL, rt4, &ever);
-		pthread_create(&thread_ID[4], NULL, rt5, &ever);
 		
 		pthread_join(thread_ID[0], &exit_value0);
 		pthread_join(thread_ID[1], &exit_value1);
 		pthread_join(thread_ID[2], &exit_value2);
-		pthread_join(thread_ID[3], &exit_value3);
-		pthread_join(thread_ID[4], &exit_value4);*/
+		pthread_join(thread_ID[3], &exit_value3);*/
 	}
 	else
 	{

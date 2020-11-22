@@ -22,11 +22,6 @@ double         rt_intersction(t_triangles *triangle, t_ray ray)
     return (t);
 }
 
-int fequal(float a, float b)
-{
- return fabs(a-b) < 0.0001;
-}
-
 t_triangles     *find_closest(t_triangles *head, t_ray ray)
 {
     t_triangles*    triangle = (t_triangles*)malloc(sizeof(t_triangles));
@@ -51,7 +46,6 @@ t_triangles     *find_closest(t_triangles *head, t_ray ray)
     return (triangle);
 }
 
-
 void *rt1(void *arg)
 {
     t_everything *ever = (t_everything *)arg;
@@ -60,7 +54,7 @@ void *rt1(void *arg)
     t_triangles *one;
 
 	i = -1;   
-	while (++i < WIDTH)
+	while (++i < WIDTH/2)
 	{
 		j = -1;
 		while (++j < (HEIGHT)/5)
@@ -86,11 +80,11 @@ void *rt2(void *arg)
 	t_ray		ray;
     t_triangles *one;
 
-	i = -1;   
+	i = (WIDTH/2)-1;   
 	while (++i < WIDTH)
 	{
-		j = (HEIGHT/5)-1;
-		while (++j < 2*(HEIGHT/5))
+		j = -1;
+		while (++j < HEIGHT/2)
 		{
             ray = generate_ray(&ever->cam,i,j);
             one = find_closest(ever->triangles,ray);
@@ -114,10 +108,10 @@ void *rt3(void *arg)
     t_triangles *one;
 
 	i = -1;   
-	while (++i < WIDTH)
+	while (++i < WIDTH/2)
 	{
-		j = 2*(HEIGHT/5)-1;
-		while (++j < 3*(HEIGHT/5))
+		j = HEIGHT/2;
+		while (++j < HEIGHT)
 		{
             ray = generate_ray(&ever->cam,i,j);
             one = find_closest(ever->triangles,ray);
@@ -140,38 +134,11 @@ void *rt4(void *arg)
 	t_ray		ray;
     t_triangles *one;
 
-	i = -1;   
+	i = WIDTH/2;   
 	while (++i < WIDTH)
 	{
-		j = 3*(HEIGHT/5)-1;
-		while (++j < 4*(HEIGHT/5))
-		{
-            ray = generate_ray(&ever->cam,i,j);
-            one = find_closest(ever->triangles,ray);
-            if (one == NULL)
-            {
-                ft_mlx_pixel_put(ever->mlx, i, j, 0x000000);
-                continue;
-            }
-			ft_mlx_pixel_put(ever->mlx, i, j, 0xff);
-		}
-	}
-	mlx_put_image_to_window(ever->mlx->mlx_ptr,ever->mlx->win_ptr, ever->mlx->img_ptr, 0, 0);
-    return (NULL);
-}
-
-void *rt5(void *arg)
-{
-    t_everything *ever = (t_everything *)arg;
-	int i,j;
-	t_ray		ray;
-    t_triangles *one;
-
-	i = -1;   
-	while (++i < WIDTH)
-	{
-		j = 4*(HEIGHT/5)-1;
-		while (++j < 5*(HEIGHT/5))
+		j = HEIGHT/2 -1;
+		while (++j < HEIGHT)
 		{
             ray = generate_ray(&ever->cam,i,j);
             one = find_closest(ever->triangles,ray);

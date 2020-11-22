@@ -142,7 +142,6 @@ void *rt1(void *arg);
 void *rt2(void *arg);
 void *rt3(void *arg);
 void *rt4(void *arg);
-void *rt5(void *arg);
 
 double         rt_intersction(t_triangles *triangle, t_ray ray);
 t_ray			generate_ray(t_camera *camera, int i, int j);
