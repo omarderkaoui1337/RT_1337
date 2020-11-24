@@ -57,7 +57,7 @@ void *rt1(void *arg)
 	while (++i < WIDTH/2)
 	{
 		j = -1;
-		while (++j < (HEIGHT)/5)
+		while (++j < (HEIGHT)/2)
 		{
             ray = generate_ray(&ever->cam,i,j);
             one = find_closest(ever->triangles,ray);
@@ -84,7 +84,7 @@ void *rt2(void *arg)
 	while (++i < WIDTH)
 	{
 		j = -1;
-		while (++j < HEIGHT/2)
+		while (++j < (HEIGHT/2))
 		{
             ray = generate_ray(&ever->cam,i,j);
             one = find_closest(ever->triangles,ray);
@@ -110,7 +110,7 @@ void *rt3(void *arg)
 	i = -1;   
 	while (++i < WIDTH/2)
 	{
-		j = HEIGHT/2;
+		j = (HEIGHT/2) -1;
 		while (++j < HEIGHT)
 		{
             ray = generate_ray(&ever->cam,i,j);
@@ -134,10 +134,10 @@ void *rt4(void *arg)
 	t_ray		ray;
     t_triangles *one;
 
-	i = WIDTH/2;   
+	i = WIDTH/2 -1;   
 	while (++i < WIDTH)
 	{
-		j = HEIGHT/2 -1;
+		j = (HEIGHT/2) -1;
 		while (++j < HEIGHT)
 		{
             ray = generate_ray(&ever->cam,i,j);

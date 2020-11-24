@@ -11,7 +11,6 @@
 # include <stdio.h> 
 # include <stdbool.h>
 # include <float.h>
-
 #include <pthread.h>
 
 # define HEIGHT			1000

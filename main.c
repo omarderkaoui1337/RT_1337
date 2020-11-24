@@ -8,7 +8,7 @@ void print_the_data(t_triangles *tst)
 		{
 			printf("normal = [%f] [%f] [%f]\n",tst->normal.x,tst->normal.y,tst->normal.z);
 			printf("-------->ver[0] = [%f] [%f] [%f]\n",tst->ver[0].x,tst->ver[0].y,tst->ver[0].z);
-			printf("-------->ver[1] = [%f] [%f] [%f]\n",tst->ver[1].x,tst->ver[1].y,tst->ver[2].z);
+			printf("-------->ver[1] = [%f] [%f] [%f]\n",tst->ver[1].x,tst->ver[1].y,tst->ver[1].z);
 			printf("-------->ver[2] = [%f] [%f] [%f]\n",tst->ver[2].x,tst->ver[2].y,tst->ver[2].z);
 			tst = tst->next;
 		}
@@ -75,7 +75,8 @@ int main(int ac, char **arv)
 		ft_mlx_setup(ever.mlx);
 		t_box	box;
 
-		pthread_t	thread_ID[5];
+		//pthread_t	thread_ID[4];
+		pthread_t thread1, thread2, thread3, thread4;
 		void *exit_value0;
 		void *exit_value1;
 		void *exit_value2;
@@ -89,20 +90,20 @@ int main(int ac, char **arv)
 		box = find_box(ever.triangles);
 		ever.cam = creat_camera(box);
 
-		rt1(&ever);
+		/*rt1(&ever);
 		rt2(&ever);
 		rt3(&ever);
-		rt4(&ever);
+		rt4(&ever);*/
 
-		/*pthread_create(&thread_ID[0], NULL, rt1, &ever);
-		pthread_create(&thread_ID[1], NULL, rt2, &ever);
-		pthread_create(&thread_ID[2], NULL, rt3, &ever);
-		pthread_create(&thread_ID[3], NULL, rt4, &ever);
+		pthread_create(&thread1, NULL, rt1, &ever);
+		pthread_create(&thread2, NULL, rt2, &ever);
+		pthread_create(&thread3, NULL, rt3, &ever);
+		pthread_create(&thread4, NULL, rt4, &ever);
 		
-		pthread_join(thread_ID[0], &exit_value0);
-		pthread_join(thread_ID[1], &exit_value1);
-		pthread_join(thread_ID[2], &exit_value2);
-		pthread_join(thread_ID[3], &exit_value3);*/
+		pthread_join(thread1, NULL);
+		pthread_join(thread2, NULL);
+		pthread_join(thread3, NULL);
+		pthread_join(thread4, NULL);
 	}
 	else
 	{
