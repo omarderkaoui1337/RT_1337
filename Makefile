@@ -31,11 +31,11 @@ lib:
 	@make -C libft
 
 $(NAME): $(OBJS)
-	@gcc $(OBJS) -o $(NAME) $(LFLAGS) $(LIBFT) $(PTHFLAG)
+	@gcc $(OBJS) -o $(NAME) $(PFLAGS) $(LIBFT) $(PTHFLAG)
 	@echo "\033[92mDone\033[0m"
 
 $(OBJS): %.o : %.c
-	@gcc -c -o $@ $<
+	@gcc -g -c -o $@ $<
 clean:
 	@rm -f $(OBJS)
 

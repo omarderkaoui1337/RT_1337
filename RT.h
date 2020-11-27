@@ -1,7 +1,6 @@
 #ifndef RT_H
 # define RT_H
 
-#include <ctype.h>// for isadigit
 # include "mlx.h"
 # include <math.h>
 # include <fcntl.h>
@@ -13,8 +12,8 @@
 # include <float.h>
 #include <pthread.h>
 
-# define HEIGHT			1000
-# define WIDTH			1000
+# define HEIGHT			700
+# define WIDTH			700
 
 extern double MAX;
 
@@ -110,7 +109,10 @@ typedef struct 		s_everything
 {
 	t_mlx *mlx;
 	t_camera cam;
-	t_triangles *triangles;
+	t_triangles *triangles0;
+	t_triangles *triangles1;
+	t_triangles *triangles2;
+	t_triangles *triangles3;
 }					t_everything;
 
 int					key_press(int keycode, void *param);

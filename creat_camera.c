@@ -62,7 +62,5 @@ t_camera creat_camera(t_box box)
     camera.aspect_ratio = (float)WIDTH / (float)HEIGHT;
     camera.h_height = get_dist(cube.d,cube.a);
     camera.h_width = camera.aspect_ratio * camera.h_height;
-
-    printf("height = %f, width = %f\n",camera.h_height, camera.h_width);
     return (camera);
 }

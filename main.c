@@ -1,5 +1,4 @@
 #include "RT.h"
-
 double MAX = 1000000.0;
 
 void print_the_data(t_triangles *tst)
@@ -23,7 +22,6 @@ void print_the_box(t_box box)
 	printf("box.z_max %f \n ",box.z_max);
 	printf("box.z_min %f \n ",box.z_min);
 }
-
 void print_the_cube(t_cube cube)
 {
 	printf("cube a %f %f %f\n", cube.a.x, cube.a.y, cube.a.z);
@@ -35,7 +33,6 @@ void print_the_cube(t_cube cube)
 	printf("cube g %f %f %f\n", cube.g.x, cube.g.y, cube.g.z);
 	printf("cube h %f %f %f\n", cube.h.x, cube.h.y, cube.h.z);
 }
-
 void print_the_camera(t_camera camera)
 {
 	printf("eye %f %f %f\n", camera.eye.x, camera.eye.y, camera.eye.z);
@@ -47,7 +44,6 @@ void print_the_camera(t_camera camera)
 	printf("h_width %f \n", camera.h_width);
 	printf("h_height %f \n", camera.h_height);
 }
-
 t_triangles* removeLastNode(t_triangles *head) 
 { 
     if (head == NULL) 
@@ -65,30 +61,60 @@ t_triangles* removeLastNode(t_triangles *head)
     return head; 
 } 
 
+t_triangles* copylist(t_triangles* head)
+{
+    t_triangles* current = head;
+    t_triangles *copie ,*head_copie;
+
+	if (head == NULL)
+		return NULL;
+
+// Part 2 - the head element
+	copie = (t_triangles *)malloc(sizeof(t_triangles));
+	copie->ver = (t_point *)malloc(sizeof(t_point)*3);
+	copie->normal = head->normal;
+	copie->ver[0] = head->ver[0];
+	copie->ver[1] = head->ver[1];
+	copie->ver[2] = head->ver[2];
+// Part 3 - the rest of the list
+	head_copie = copie;
+	head = head->next;
+	while(head != NULL)
+	{
+    	copie->next =(t_triangles *)malloc(sizeof(t_triangles));
+		copie->next->ver = (t_point *)malloc(sizeof(t_point) * 3);
+    	copie = copie->next;
+    	copie->ver[0] = head->ver[0];
+		copie->ver[1] = head->ver[1];
+		copie->ver[2] = head->ver[2];
+    	head = head->next;
+	}
+	copie->next = NULL; 
+	return(head_copie);
+}
+
 int main(int ac, char **arv)
 {
 	t_everything ever;
 	ever.mlx = (t_mlx*)malloc(sizeof(t_mlx));
-	int fd;
     if (ac == 2)
 	{
 		ft_mlx_setup(ever.mlx);
-		t_box	box;
+		t_box		box;
+		int 		fd;
+		
 
-		//pthread_t	thread_ID[4];
 		pthread_t thread1, thread2, thread3, thread4;
-		void *exit_value0;
-		void *exit_value1;
-		void *exit_value2;
-		void *exit_value3;
-		void *exit_value4;
-	
-
 		fd = open(arv[1], O_RDONLY);
-		ever.triangles = stock_triangles(fd);
-		ever.triangles = removeLastNode(ever.triangles);
-		box = find_box(ever.triangles);
+		ever.triangles0 = stock_triangles(fd);
+		ever.triangles0 = removeLastNode(ever.triangles0);
+
+		box = find_box(ever.triangles0);
 		ever.cam = creat_camera(box);
+
+		ever.triangles1 = copylist(ever.triangles0);
+		ever.triangles2 = copylist(ever.triangles0);
+		ever.triangles3 = copylist(ever.triangles0);
 
 		/*rt1(&ever);
 		rt2(&ever);

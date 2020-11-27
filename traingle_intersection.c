@@ -60,7 +60,7 @@ void *rt1(void *arg)
 		while (++j < (HEIGHT)/2)
 		{
             ray = generate_ray(&ever->cam,i,j);
-            one = find_closest(ever->triangles,ray);
+            one = find_closest(ever->triangles0,ray);
             if (one == NULL)
             {
                 ft_mlx_pixel_put(ever->mlx, i, j, 0x000000);
@@ -87,7 +87,7 @@ void *rt2(void *arg)
 		while (++j < (HEIGHT/2))
 		{
             ray = generate_ray(&ever->cam,i,j);
-            one = find_closest(ever->triangles,ray);
+            one = find_closest(ever->triangles1,ray);
             if (one == NULL)
             {
                 ft_mlx_pixel_put(ever->mlx, i, j, 0x000000);
@@ -114,7 +114,7 @@ void *rt3(void *arg)
 		while (++j < HEIGHT)
 		{
             ray = generate_ray(&ever->cam,i,j);
-            one = find_closest(ever->triangles,ray);
+            one = find_closest(ever->triangles2,ray);
             if (one == NULL)
             {
                 ft_mlx_pixel_put(ever->mlx, i, j, 0x000000);
@@ -141,7 +141,7 @@ void *rt4(void *arg)
 		while (++j < HEIGHT)
 		{
             ray = generate_ray(&ever->cam,i,j);
-            one = find_closest(ever->triangles,ray);
+            one = find_closest(ever->triangles3,ray);
             if (one == NULL)
             {
                 ft_mlx_pixel_put(ever->mlx, i, j, 0x000000);
