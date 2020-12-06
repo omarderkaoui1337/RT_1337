@@ -116,10 +116,6 @@ int main(int ac, char **arv)
 		ever.triangles2 = copylist(ever.triangles0);
 		ever.triangles3 = copylist(ever.triangles0);
 
-		/*rt1(&ever);
-		rt2(&ever);
-		rt3(&ever);
-		rt4(&ever);*/
 
 		pthread_create(&thread1, NULL, rt1, &ever);
 		pthread_create(&thread2, NULL, rt2, &ever);

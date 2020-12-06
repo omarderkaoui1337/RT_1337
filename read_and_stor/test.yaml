@@ -1,0 +1,7 @@
+camera :
+	- eye:
+	0 0 100
+	- look_at:
+	 0 0 0
+	- fov:
+	60

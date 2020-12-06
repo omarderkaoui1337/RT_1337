@@ -105,6 +105,43 @@ typedef struct		s_cube
 	t_point	face_centre4; 
 }					t_cube;
 
+typedef	struct		s_rot
+{
+	int				on;
+	int				alpha_x;
+	int				alpha_y;
+	int				alpha_z;
+}					t_rot;
+
+typedef	struct		s_trans
+{
+	int				on;
+	t_vector		vec;
+}					t_trans;
+
+typedef struct		s_light_coeffs
+{
+	float			ks;
+	float			kd;
+	float			n;
+}					t_light_coeffs;
+
+typedef struct		s_object
+{
+	char			*name;
+	int				color;
+	t_vector		center;
+	t_vector		vec_dir;
+	float			radius;
+	float			alpha;
+	t_light_coeffs	coeffs;
+	double			t;
+	double			tsh;
+	t_rot			rot;
+	t_trans			trans;
+	float			k;
+}					t_object;
+
 typedef struct 		s_everything
 {
 	t_mlx *mlx;
